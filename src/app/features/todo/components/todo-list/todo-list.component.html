@@ -1,0 +1,54 @@
+
+
+<div class="row">
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <mat-select [(ngModel)]="activeFilter$" name="filter" (selectionChange)="changeFilter($event)">
+      <mat-option *ngFor="let todoFilter of initialFilters" [value]="todoFilter.value">
+        {{todoFilter.label}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  
+<h1>TODOS HISTORY</h1>
+
+
+<table mat-table [dataSource]="todos$" class="mat-elevation-z8">
+
+   
+    <!-- Id -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+     <!-- Completed Column -->
+     <ng-container matColumnDef="completed">
+        <th mat-header-cell *matHeaderCellDef> Is Completed </th>
+        <td mat-cell *matCellDef="let element"> 
+            <mat-checkbox [checked]="element.completed"  (change)="completeTodo(element)">Completed</mat-checkbox>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" aria-label="Delete" (click)="deleteTodo(element)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+</div>

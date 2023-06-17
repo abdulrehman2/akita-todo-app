@@ -1,0 +1,14 @@
+<div class="row">
+
+    <mat-form-field class="">
+      <mat-label>Add A Todo</mat-label>
+      <input matInput placeholder="Todo" #input (keydown.enter)="add(input)">
+      <mat-icon matSuffix>alarm</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <app-todo-list 
+  (deleteTodoEvent)="deleteTodo($event)"
+  (completeTodoEvent)="completeTodo($event)"
+  (changeFilterEvent)="updateFilter($event)"
+  ></app-todo-list>
